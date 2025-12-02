@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon CV - RAMIANDRISOA</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+ 
+        header {
+            background-color: #1e1e2f;
+            color: white;
+            padding: 30px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+ 
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+ 
+        .cv-container {
+            margin: 30px auto;
+            max-width: 500px;
+        }
+ 
+        .cv-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+ 
+        .btn-retour {
+            display: inline-block;
+            margin: 40px auto;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+ 
+        .btn-retour:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+ 
+    <header>
+        <h1>Mon Curriculum.Vitae</h1>
+    </header>
+ 
+    <div class="cv-container">
+        <img src="IMAGES/cv image.png" alt="CV de RAMIANDRISOA">
+    </div>
+ 
+    <a href="Index.html" class="btn-retour">← Retour au Portfolio</a>
+ 
+</body>
