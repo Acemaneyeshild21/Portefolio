@@ -1,184 +1,654 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Développeur Web</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="Portfolio Numérique — Épreuve E5 — Daniel Ramiandrisoa — Développeur Web Full Stack">
+    <meta name="author" content="Daniel Ramiandrisoa">
+    <title>Daniel Ramiandrisoa · Portfolio Numérique (E5)</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Bienvenue sur mon Portfolio</h1>
-            <img src="IMAGES/dani picture.jpg" alt="Photo de profil de Daniel" class="profile-pic">
-            <p>Découvrez mes compétences, mes projets, mon rapport de stage, ma veille technologique.</p>
-        </div>
 
-        <header class="main-header">
-            <nav class="navbar">
-                <div class="nav-brand">
-                    <div class="logo">rd</div>
-                    <div class="brand-text">
-                        <h2>Portfolio de DANIEL</h2>
-                        <span>Développeur Web</span>
-                    </div>
+    <!-- ANIMATED BACKGROUND -->
+    <div class="bg-wrapper" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- NAVIGATION -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#profil" class="nav-brand">
+                <div class="logo-badge">
+                    <span>RD</span>
                 </div>
-                
-                <div class="nav-links">
-                    <a href="#projects"><i class="fas fa-project-diagram"></i> Projets</a>
-                    <a href="#skills"><i class="fas fa-tools"></i> Compétences</a>
-                    <a href="#internship"><i class="fas fa-briefcase"></i> Rapport de Stage</a>
-                    <a href="#tech-watch"><i class="fas fa-eye"></i> Veille Technologique</a>
-                    <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                <div class="brand-info">
+                    <strong>Daniel</strong>
+                    <small>Portfolio E5</small>
                 </div>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#profil" class="nav-link active"><i class="fas fa-user"></i> Profil</a>
+                <a href="#formation" class="nav-link"><i class="fas fa-graduation-cap"></i> Projets Formation</a>
+                <a href="#entreprise" class="nav-link"><i class="fas fa-briefcase"></i> Projets Entreprise</a>
+                <a href="#synthese" class="nav-link"><i class="fas fa-table"></i> Synthèse</a>
+                <a href="#competences" class="nav-link"><i class="fas fa-layer-group"></i> Compétences</a>
+                <a href="#contact" class="nav-link"><i class="fas fa-paper-plane"></i> Contact</a>
             </nav>
-        </header>
 
-        <div class="card" id="projects">
-            <h3><i class="fas fa-project-diagram"></i> Mes projets</h3>
-            <div class="projects">
-                <a href="http://localhost:8080" style="color:inherit; text-decoration:none;" class="project-link">
-                    <div class="project">
-                        <i class="fas fa-code"></i>
-                        <h4>Applications Web INVOICING</h4>
-                        <p>Gestion de facture</p>
-                    </div>
-                </a>
-                <a href="portfolio.html" style="color:inherit; text-decoration:none;" class="project-link">
-                    <div class="project">
-                        <i class="fas fa-house"></i>
-                        <h4>Portfolio Personnel</h4>
-                        <p>Ce site, conçu avec HTML et CSS modernes.</p>
-                    </div>
-                </a>
-                <a href="vms-vouchers.html" style="color:inherit; text-decoration:none;" class="project-link">
-                    <div class="project">
-                        <i class="fas fa-chart-line"></i>
-                        <h4>VMS vouchers</h4>
-                        <p>Un panneau d'administration pour gérer les bons de commandes.</p>
-                    </div>
-                </a>
-                <a href="http://localhost/Projet%20supercar%20local/supercar/" style="color:inherit; text-decoration:none;" class="project-link">
-                    <div class="project">
-                        <i class="fas fa-car"></i>
-                        <h4>Supercar</h4>
-                        <p>Ce site, /supercar/ avec HTML, CSS, PHP et MySQL.</p>
-                    </div>
-                </a>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
+                    <i class="fas fa-moon icon-moon"></i>
+                    <i class="fas fa-sun icon-sun"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
+    </header>
 
-        <div class="card" id="skills">
-            <h3><i class="fas fa-tools"></i> Mes Compétences</h3>
-            <div class="features">
-                <div class="feature">
-                    <i class="fas fa-code"></i>
-                    <h4>HTML/CSS</h4>
-                    <p>Maîtrise avancée du développement front-end.</p>
+    <main>
+
+        <!-- ============ 1. PROFIL ============ -->
+        <section class="hero" id="profil">
+            <div class="hero-inner">
+                <div class="hero-content" data-reveal>
+                    <div class="status-pill">
+                        <span class="status-dot"></span>
+                        Portfolio Numérique — Épreuve E5
+                    </div>
+
+                    <h1 class="hero-title">
+                        Bonjour, je suis <span class="gradient-text">Daniel</span>.<br>
+                        <span class="hero-typed">
+                            Je conçois
+                            <span class="typed" id="typed"></span><span class="caret">|</span>
+                        </span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Étudiant développeur Web passionné, je présente ici mon parcours complet :
+                        projets en formation, projets en entreprise, compétences et veilles.
+                        Stack principale : <strong>HTML · CSS · JavaScript · PHP · MySQL</strong>.
+                    </p>
+
+                    <div class="hero-cta">
+                        <a href="#formation" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i> Voir mes projets
+                        </a>
+                        <a href="CV.pdf" class="btn btn-ghost" download>
+                            <i class="fas fa-download"></i> Télécharger mon CV
+                        </a>
+                    </div>
+
+                    <!-- Profil quick links -->
+                    <div class="profile-links">
+                        <a href="CV.pdf" target="_blank" class="profile-link">
+                            <i class="fas fa-file-lines"></i> CV
+                        </a>
+                        <a href="#" target="_blank" rel="noopener" class="profile-link">
+                            <i class="fab fa-linkedin-in"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/Acemaneyeshild21" target="_blank" rel="noopener" class="profile-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="#contact" class="profile-link">
+                            <i class="fas fa-envelope"></i> Contact
+                        </a>
+                    </div>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-js"></i>
-                    <h4>JavaScript</h4>
-                    <p>Création d'interactions dynamiques.</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-database"></i>
-                    <h4>PHP/MySQL</h4>
-                    <p>Développement back-end et bases de données.</p>
+
+                <div class="hero-visual" data-reveal="right">
+                    <div class="avatar-ring">
+                        <div class="avatar-glow"></div>
+                        <img src="IMAGES/dani picture.jpg" alt="Daniel" class="avatar">
+                        <div class="floating-chip chip-1"><i class="fab fa-html5"></i></div>
+                        <div class="floating-chip chip-2"><i class="fab fa-css3-alt"></i></div>
+                        <div class="floating-chip chip-3"><i class="fab fa-js"></i></div>
+                        <div class="floating-chip chip-4"><i class="fab fa-php"></i></div>
+                        <div class="floating-chip chip-5"><i class="fas fa-database"></i></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card" id="internship">
-            <h3><i class="fas fa-briefcase"></i> Rapport de Stage</h3>
-            <p>Durant mon stage chez VIRMATICS, j'ai travaillé avec une équipe sur le développement d'une application web. Voici un résumé de mon expérience :</p>
-            <ul style="margin-top: 15px; padding-left: 20px; color: #5a6c7d; line-height: 1.8;">
-                <li>Tâche 1 : Création d'un site vitrine avec Figma</li>
-                <li>Tâche 2 : Optimisation des performances sur UML</li>
-                <li>Résultat : Augmentation de productivité</li>
-            </ul>
-            <a href="CVhtml" class="btn btn-link" download>Télécharger le Rapport (PDF)</a>
-        </div>
-
-        <div class="card" id="tech-watch">
-            <h3><i class="fas fa-eye"></i> Veille Technologique</h3>
-            <p>Je reste à jour avec les dernières tendances technologiques. Voici quelques domaines que je suis :</p>
-            <div class="features">
-                <div class="feature">
-                    <i class="fas fa-laptop-code"></i>
-                    <h4><a href="veille 1 js.html" style="color:inherit; text-decoration:none;">Frameworks JS</a></h4>
-                    <p>Exploration de React et Vue.js.</p>
+            <div class="hero-stats" data-reveal>
+                <div class="stat">
+                    <strong><span class="counter" data-target="4">0</span></strong>
+                    <span>Projets majeurs</span>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-cloud"></i>
-                    <h4><a href="php watch.html" style="color:inherit; text-decoration:none;">Cloud Computing</a></h4>
-                    <p>Étude de laravel .</p>
+                <div class="stat">
+                    <strong><span class="counter" data-target="2">0</span></strong>
+                    <span>Stages en entreprise</span>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-lock"></i>
-                    <h4><a href="veille 3 securite web.html" style="color:inherit; text-decoration:none;">Sécurité Web</a></h4>
-                    <p>Veille sur les meilleures pratiques.</p>
+                <div class="stat">
+                    <strong><span class="counter" data-target="8">0</span>+</strong>
+                    <span>Technologies</span>
+                </div>
+                <div class="stat">
+                    <strong><span class="counter" data-target="100">0</span>%</strong>
+                    <span>Engagement</span>
                 </div>
             </div>
-        </div>
 
-        <div class="card" id="summary">
-            <h3><i class="fas fa-table"></i> Tableau de Synthèse</h3>
-            <table class="summary-table">
-                <thead>
-                    <tr>
-                        <th>Expérience</th>
-                        <th>Compétence Acquise</th>
-                        <th>Résultat</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Stage VIRMATICS</td>
-                        <td>Développement PHP</td>
-                        <td>Site livré en 2 mois</td>
-                    </tr>
-                    <tr>
-                        <td>Projet Personnel</td>
-                        <td>Design Responsive</td>
-                        <td>Portfolio optimisé</td>
-                    </tr>
-                    <tr>
-                        <td>Formation</td>
-                        <td>Javascript Avancé</td>
-                        <td>Maîtrise des API</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <a href="#formation" class="scroll-indicator" aria-label="Descendre">
+                <span></span>
+            </a>
+        </section>
 
-        <div class="content" id="content">
-            <div class="card" id="about">
-                <h3><i class="fas fa-user-circle"></i> À propos de moi</h3>
-                <p>Je suis un développeur web passionné par la création de sites modernes et fonctionnels. Avec une expérience en HTML, CSS, JavaScript, et PHP, je transforme des idées en solutions numériques.</p>
+        <!-- ============ 2. PROJETS EN FORMATION ============ -->
+        <section class="section" id="formation">
+            <div class="section-head" data-reveal>
+                <span class="section-kicker">Projets en formation</span>
+                <h2 class="section-title">Mes projets <span class="gradient-text">académiques</span></h2>
+                <p class="section-subtitle">Projets réalisés dans le cadre de ma formation — Épreuves RP1 et RP2.</p>
             </div>
 
-            <div class="contact-form" id="contact">
-                <h3><i class="fas fa-envelope"></i> Contactez-moi</h3>
-                <form>
+            <!-- PROJECT 1 — SUPERCAR (RP1) -->
+            <article class="project-block glass" data-reveal id="project-supercar">
+                <div class="project-header">
+                    <div class="project-title-row">
+                        <div class="project-badge">
+                            <i class="fas fa-car-side"></i>
+                        </div>
+                        <div>
+                            <span class="project-kicker">RP1 · Projet Web</span>
+                            <h3>Supercar</h3>
+                        </div>
+                    </div>
+                    <!-- 👇 BOUTON DE PRÉSENTATION (Gamma) -->
+                    <a href="#REMPLACER_PAR_LIEN_GAMMA_SUPERCAR" target="_blank" rel="noopener" class="btn btn-primary btn-presentation" data-gamma="supercar">
+                        <i class="fas fa-display"></i> Voir la présentation
+                    </a>
+                </div>
+
+                <p class="project-description">
+                    Site web complet de présentation et gestion d'un catalogue de voitures de sport,
+                    développé avec HTML, CSS, PHP et MySQL dans le cadre de l'épreuve RP1.
+                </p>
+
+                <div class="project-stack">
+                    <span>HTML5</span><span>CSS3</span><span>PHP</span><span>MySQL</span><span>JavaScript</span>
+                </div>
+
+                <div class="project-resources">
+                    <h4><i class="fas fa-folder-tree"></i> Ressources du projet</h4>
+                    <div class="resource-grid">
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-file-lines"></i>
+                            <span>Contexte Application</span>
+                        </a>
+                        <a href="#REMPLACER_PAR_LIEN_GAMMA_SUPERCAR" target="_blank" rel="noopener" class="resource-card resource-highlight">
+                            <i class="fas fa-display"></i>
+                            <span>Présentation Projet</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Fiche Descriptive — RP1</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Rapport de projet — RP1</span>
+                        </a>
+                        <a href="http://localhost/Projet%20supercar%20local/supercar/" class="resource-card">
+                            <i class="fas fa-circle-play"></i>
+                            <span>Démo de l'application RP1</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 2 — PHARMAGEST / VMS (RP2) -->
+            <article class="project-block glass" data-reveal style="--delay:.1s" id="project-vms">
+                <div class="project-header">
+                    <div class="project-title-row">
+                        <div class="project-badge">
+                            <i class="fas fa-prescription-bottle-medical"></i>
+                        </div>
+                        <div>
+                            <span class="project-kicker">RP2 · Projet Backoffice</span>
+                            <h3>Pharmagest · VMS</h3>
+                        </div>
+                    </div>
+                    <!-- 👇 BOUTON DE PRÉSENTATION (Gamma) -->
+                    <a href="#REMPLACER_PAR_LIEN_GAMMA_VMS" target="_blank" rel="noopener" class="btn btn-primary btn-presentation" data-gamma="vms">
+                        <i class="fas fa-display"></i> Voir la présentation
+                    </a>
+                </div>
+
+                <p class="project-description">
+                    Backoffice d'administration VMS permettant la gestion complète des bons de commande
+                    et des vouchers pour Pharmagest, développé dans le cadre de l'épreuve RP2.
+                </p>
+
+                <div class="project-stack">
+                    <span>PHP</span><span>MySQL</span><span>JavaScript</span><span>Bootstrap</span>
+                </div>
+
+                <div class="project-resources">
+                    <h4><i class="fas fa-folder-tree"></i> Ressources du projet</h4>
+                    <div class="resource-grid">
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-file-lines"></i>
+                            <span>Contexte Application Backoffice</span>
+                        </a>
+                        <a href="#REMPLACER_PAR_LIEN_GAMMA_VMS" target="_blank" rel="noopener" class="resource-card resource-highlight">
+                            <i class="fas fa-display"></i>
+                            <span>Présentation Projet</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Fiche Descriptive — RP2</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Rapport de projet — RP2</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-circle-play"></i>
+                            <span>Démo de l'application RP2</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROJECT 3 — RESTOORDER (Projet supplémentaire) -->
+            <article class="project-block glass" data-reveal style="--delay:.2s" id="project-restoorder">
+                <div class="project-header">
+                    <div class="project-title-row">
+                        <div class="project-badge">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div>
+                            <span class="project-kicker">Projet supplémentaire</span>
+                            <h3>Restoorder</h3>
+                        </div>
+                    </div>
+                    <!-- 👇 BOUTON DE PRÉSENTATION (Gamma) -->
+                    <a href="#REMPLACER_PAR_LIEN_GAMMA_RESTOORDER" target="_blank" rel="noopener" class="btn btn-primary btn-presentation" data-gamma="restoorder">
+                        <i class="fas fa-display"></i> Voir la présentation
+                    </a>
+                </div>
+
+                <p class="project-description">
+                    Application web de commande en ligne pour restaurants, permettant aux clients
+                    de consulter le menu et de passer commande facilement.
+                </p>
+
+                <div class="project-stack">
+                    <span>PHP</span><span>MySQL</span><span>JavaScript</span><span>HTML/CSS</span>
+                </div>
+
+                <div class="project-resources">
+                    <h4><i class="fas fa-folder-tree"></i> Ressources du projet</h4>
+                    <div class="resource-grid">
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-file-lines"></i>
+                            <span>Contexte Application</span>
+                        </a>
+                        <a href="#REMPLACER_PAR_LIEN_GAMMA_RESTOORDER" target="_blank" rel="noopener" class="resource-card resource-highlight">
+                            <i class="fas fa-display"></i>
+                            <span>Présentation Projet</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Fiche Descriptive</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Rapport de projet</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-circle-play"></i>
+                            <span>Démo de l'application</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ============ 3. PROJETS EN ENTREPRISE ============ -->
+        <section class="section" id="entreprise">
+            <div class="section-head" data-reveal>
+                <span class="section-kicker">Projets en entreprise</span>
+                <h2 class="section-title">Mes <span class="gradient-text">stages</span></h2>
+                <p class="section-subtitle">Expériences professionnelles acquises en entreprise durant ma formation.</p>
+            </div>
+
+            <!-- STAGE 1ère ANNÉE -->
+            <article class="project-block glass" data-reveal id="stage-1">
+                <div class="project-header">
+                    <div class="project-title-row">
+                        <div class="project-badge badge-alt">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <span class="project-kicker">Stage 1ère année</span>
+                            <h3>Stage en entreprise — 1er</h3>
+                        </div>
+                    </div>
+                    <!-- 👇 BOUTON DE PRÉSENTATION (Gamma) -->
+                    <a href="#REMPLACER_PAR_LIEN_GAMMA_STAGE1" target="_blank" rel="noopener" class="btn btn-primary btn-presentation" data-gamma="stage1">
+                        <i class="fas fa-display"></i> Voir la présentation
+                    </a>
+                </div>
+
+                <p class="project-description">
+                    Première immersion en entreprise — découverte du monde professionnel,
+                    travail en équipe et application concrète des compétences acquises en formation.
+                </p>
+
+                <div class="project-resources">
+                    <h4><i class="fas fa-folder-tree"></i> Documents du stage</h4>
+                    <div class="resource-grid">
+                        <a href="#REMPLACER_PAR_LIEN_GAMMA_STAGE1" target="_blank" rel="noopener" class="resource-card resource-highlight">
+                            <i class="fas fa-display"></i>
+                            <span>Présentation projet de stage</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-award"></i>
+                            <span>Attestation de stage</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-chart-column"></i>
+                            <span>Bilan de stage</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Rapport de stage</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-circle-play"></i>
+                            <span>Démo de l'application</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- STAGE 2ème ANNÉE -->
+            <article class="project-block glass" data-reveal style="--delay:.1s" id="stage-2">
+                <div class="project-header">
+                    <div class="project-title-row">
+                        <div class="project-badge badge-alt">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <span class="project-kicker">Stage 2ème année</span>
+                            <h3>Stage en entreprise — 2ème</h3>
+                        </div>
+                    </div>
+                    <!-- 👇 BOUTON DE PRÉSENTATION (Gamma) -->
+                    <a href="#REMPLACER_PAR_LIEN_GAMMA_STAGE2" target="_blank" rel="noopener" class="btn btn-primary btn-presentation" data-gamma="stage2">
+                        <i class="fas fa-display"></i> Voir la présentation
+                    </a>
+                </div>
+
+                <p class="project-description">
+                    Stage de consolidation — approfondissement des compétences techniques,
+                    autonomie sur un projet concret et intégration en entreprise.
+                </p>
+
+                <div class="project-resources">
+                    <h4><i class="fas fa-folder-tree"></i> Documents du stage</h4>
+                    <div class="resource-grid">
+                        <a href="#REMPLACER_PAR_LIEN_GAMMA_STAGE2" target="_blank" rel="noopener" class="resource-card resource-highlight">
+                            <i class="fas fa-display"></i>
+                            <span>Présentation projet de stage</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-award"></i>
+                            <span>Attestation de stage</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-chart-column"></i>
+                            <span>Bilan de stage</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Rapport de stage</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-circle-play"></i>
+                            <span>Démo de l'application</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ============ 4. TABLEAU DE SYNTHÈSE ============ -->
+        <section class="section" id="synthese">
+            <div class="section-head" data-reveal>
+                <span class="section-kicker">Synthèse</span>
+                <h2 class="section-title">Tableau de <span class="gradient-text">synthèse</span></h2>
+                <p class="section-subtitle">Récapitulatif de mes expériences et compétences acquises.</p>
+            </div>
+
+            <div class="summary-wrap glass" data-reveal>
+                <div class="table-scroll">
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Expérience / Projet</th>
+                                <th>Type</th>
+                                <th>Compétences acquises</th>
+                                <th>Résultat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Supercar</strong></td>
+                                <td><span class="tag tag-blue">RP1</span></td>
+                                <td>Développement web full-stack (HTML, CSS, PHP, MySQL)</td>
+                                <td>Application livrée et fonctionnelle</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pharmagest · VMS</strong></td>
+                                <td><span class="tag tag-purple">RP2</span></td>
+                                <td>Développement backoffice, gestion des données, UX administrateur</td>
+                                <td>Backoffice opérationnel</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Restoorder</strong></td>
+                                <td><span class="tag tag-green">Projet</span></td>
+                                <td>Application web de commande, base de données, interface client</td>
+                                <td>Prototype fonctionnel</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Stage 1ère année</strong></td>
+                                <td><span class="tag tag-orange">Stage</span></td>
+                                <td>Travail en équipe, méthodologie projet, Figma, UML</td>
+                                <td>Site livré en 2 mois</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Stage 2ème année</strong></td>
+                                <td><span class="tag tag-orange">Stage</span></td>
+                                <td>Autonomie, développement avancé, intégration équipe</td>
+                                <td>Mission accomplie avec succès</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 5. AUTRES COMPÉTENCES ============ -->
+        <section class="section" id="competences">
+            <div class="section-head" data-reveal>
+                <span class="section-kicker">Autres compétences</span>
+                <h2 class="section-title">Compétences <span class="gradient-text">transversales</span></h2>
+                <p class="section-subtitle">Compétences complémentaires acquises pendant ma formation.</p>
+            </div>
+
+            <div class="competences-grid">
+                <a href="#" class="competence-card glass" data-reveal>
+                    <div class="comp-icon icon-blue"><i class="fas fa-diagram-project"></i></div>
+                    <h4>Gestion de projet</h4>
+                    <p>Planification, organisation et suivi de projets informatiques.</p>
+                </a>
+                <a href="#" class="competence-card glass" data-reveal style="--delay:.05s">
+                    <div class="comp-icon icon-purple"><i class="fas fa-people-group"></i></div>
+                    <h4>Travail en mode projet</h4>
+                    <p>Collaboration, communication et méthodologie agile.</p>
+                </a>
+                <a href="veille 1 js.html" class="competence-card glass" data-reveal style="--delay:.1s">
+                    <div class="comp-icon icon-yellow"><i class="fas fa-laptop-code"></i></div>
+                    <h4>Veille technologique</h4>
+                    <p>Suivi des frameworks JS, nouvelles tendances et bonnes pratiques.</p>
+                </a>
+                <a href="#" class="competence-card glass" data-reveal style="--delay:.15s">
+                    <div class="comp-icon icon-red"><i class="fas fa-scale-balanced"></i></div>
+                    <h4>Veille juridique</h4>
+                    <p>RGPD, droit du numérique et réglementation IT.</p>
+                </a>
+                <a href="#" class="competence-card glass" data-reveal style="--delay:.2s">
+                    <div class="comp-icon icon-green"><i class="fas fa-chart-line"></i></div>
+                    <h4>Gestion de patrimoine</h4>
+                    <p>Gestion du patrimoine informatique et inventaire.</p>
+                </a>
+                <a href="#" class="competence-card glass" data-reveal style="--delay:.25s">
+                    <div class="comp-icon icon-cyan"><i class="fas fa-cloud"></i></div>
+                    <h4>Hébergement en ligne</h4>
+                    <p>Déploiement, DNS, noms de domaine, FTP.</p>
+                </a>
+                <a href="https://github.com/Acemaneyeshild21" target="_blank" rel="noopener" class="competence-card glass" data-reveal style="--delay:.3s">
+                    <div class="comp-icon icon-dark"><i class="fab fa-github"></i></div>
+                    <h4>GitHub (versioning)</h4>
+                    <p>Git, branches, pull requests, collaboration open-source.</p>
+                </a>
+                <a href="veille 3 securite web .html" class="competence-card glass" data-reveal style="--delay:.35s">
+                    <div class="comp-icon icon-pink"><i class="fas fa-shield-halved"></i></div>
+                    <h4>Cybersécurité</h4>
+                    <p>Sécurité web (OWASP, XSS, CSRF), bonnes pratiques.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ CONTACT ============ -->
+        <section class="section" id="contact">
+            <div class="section-head" data-reveal>
+                <span class="section-kicker">Contact</span>
+                <h2 class="section-title">Travaillons <span class="gradient-text">ensemble</span></h2>
+                <p class="section-subtitle">Un projet, une idée, une question ? Je vous répondrai rapidement.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info" data-reveal>
+                    <div class="info-card glass">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <span>Email</span>
+                            <a href="mailto:maminjanaharydanielra@gmail.com">maminjanaharydanielra@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="info-card glass">
+                        <i class="fas fa-location-dot"></i>
+                        <div>
+                            <span>Localisation</span>
+                            <strong>Antananarivo, Madagascar</strong>
+                        </div>
+                    </div>
+                    <div class="info-card glass">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <span>GitHub</span>
+                            <a href="https://github.com/Acemaneyeshild21" target="_blank" rel="noopener">@Acemaneyeshild21</a>
+                        </div>
+                    </div>
+                    <div class="info-card glass">
+                        <i class="fab fa-linkedin-in"></i>
+                        <div>
+                            <span>LinkedIn</span>
+                            <a href="#" target="_blank">Mon profil LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form glass" id="contactForm" data-reveal="right">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" name="name" required placeholder="Jean Dupont">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="jean@exemple.com">
+                        </div>
+                    </div>
                     <div class="form-group">
-                        <label for="name">Nom</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                        <label for="subject">Sujet</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Proposition de projet...">
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <textarea id="message" name="message" rows="5" required placeholder="Décrivez votre projet ou votre demande..."></textarea>
                     </div>
-                    <button type="submit">Envoyer</button>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i> Envoyer le message
+                    </button>
                 </form>
             </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="logo-badge"><span>RD</span></div>
+                <div>
+                    <strong>Daniel Ramiandrisoa</strong>
+                    <p>Portfolio Numérique — Épreuve E5</p>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h5>Portfolio</h5>
+                <a href="#profil">Profil</a>
+                <a href="#formation">Projets Formation</a>
+                <a href="#entreprise">Projets Entreprise</a>
+                <a href="#synthese">Synthèse</a>
+                <a href="#competences">Compétences</a>
+            </div>
+
+            <div class="footer-links">
+                <h5>Suivez-moi</h5>
+                <a href="https://github.com/Acemaneyeshild21" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                <a href="mailto:maminjanaharydanielra@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                <a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+            </div>
         </div>
-    </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Daniel Ramiandrisoa — Tous droits réservés.</p>
+            <p>Conçu avec <i class="fas fa-heart" style="color:#ef4444"></i> et beaucoup de café ☕</p>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-top" id="backTop" aria-label="Remonter">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script src="assets/controllers/script.js"></script>
 </body>
 </html>
