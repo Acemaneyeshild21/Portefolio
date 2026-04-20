@@ -1,77 +1,221 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Veille Technologique - Php.wacth</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f7f6;
-            color: #333;
-        }
-        header {
-            background: #0077b6;
-            color: #fff;
-            padding: 1.2rem 2rem;
-            text-align: center;
-        }
-        main {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
-        }
-        h1, h2 {
-            color: #023e8a;
-            margin-bottom: 0.5rem;
-        }
-        p {
-            line-height: 1.6;
-            font-size: 1.1rem;
-        }
-        nav {
-            margin-top: 2rem;
-            text-align: center;
-        }
-        nav a {
-            color: #023e8a;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0 1.2rem;
-            font-size: 1rem;
-            transition: color 0.25s ease;
-        }
-        nav a:hover {
-            color: #90e0ef;
-        }
-        @media (max-width: 600px) {
-            main {
-                margin: 1rem;
-                padding: 1.5rem;
-            }
-            nav a {
-                margin: 0 0.7rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>php.watch — Cloud Computing</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #0E0E14;
+      color: #F0F0F8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #14141E;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      color: #B0B0CC;
+    }
+    .logo span { color: #FF2D20; }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      color: #7A7A9A;
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover { color: #F0F0F8; border-color: rgba(255,255,255,0.1); }
+    .nav-links a.active { color: #38BDF8; border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.07); }
+
+    main {
+      flex: 1;
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: #38BDF8;
+      background: rgba(56,189,248,0.1);
+      border: 1px solid rgba(56,189,248,0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: #F0F0F8;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: #38BDF8;
+    }
+
+    .desc {
+      font-size: 0.97rem;
+      color: #B0B0CC;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 2rem 0;
+    }
+
+    .tools-title {
+      font-size: 0.75rem;
+      color: #7A7A9A;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 1rem;
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .tool {
+      padding: 7px 14px;
+      background: #14141E;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      font-size: 0.84rem;
+      color: #B0B0CC;
+      transition: all 0.2s;
+    }
+
+    .tool:hover { border-color: rgba(56,189,248,0.3); color: #38BDF8; }
+
+    .note {
+      background: rgba(255,45,32,0.07);
+      border-left: 3px solid #FF2D20;
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      font-size: 0.87rem;
+      color: #B0B0CC;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .note strong { color: #FF2D20; }
+
+    .nav-bottom {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-bottom a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      background: #14141E;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      font-size: 0.84rem;
+      color: #7A7A9A;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .nav-bottom a:hover { color: #F0F0F8; border-color: rgba(255,255,255,0.2); }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1rem 2rem;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: #3A3A5A;
+    }
+
+    @media (max-width: 500px) {
+      h1 { font-size: 1.5rem; }
+      .nav-links a { font-size: 0.75rem; padding: 4px 8px; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Php.wacth</h1>
-    </header>
-    <main>
-        <h2>Étude d'AWS et Azure</h2>
-        <p>Je réalise une veille régulière sur les plateformes Cloud principales, notamment AWS et Azure, afin de maîtriser leur écosystème et leurs solutions innovantes dans le domaine du cloud computing.</p>
-        <nav>
-            <a href="frameworks-js.html">Frameworks JS</a>
-            <a href="veille 3 securite web .html">Sécurité Web</a>
-        </nav>
-    </main>
+
+  <header>
+    <div class="logo">&lt;?php<span>.</span>watch</div>
+    <nav class="nav-links">
+      <a href="cloud-computing.html" class="active">☁ Cloud</a>
+      <a href="frameworks-js.html">⚡ JS</a>
+      <a href="securite-web.html">🔒 Sécurité</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="tag">THÈME 01 — CLOUD COMPUTING</div>
+    <h1>Étude d'<em>AWS</em> et <em>Azure</em></h1>
+    <p class="desc">
+      Je réalise une veille régulière sur les deux grandes plateformes Cloud — AWS (Amazon) et Azure (Microsoft) — pour comprendre comment héberger et déployer des applications web modernes dans le cloud.
+    </p>
+
+    <hr class="divider" />
+
+    <div class="tools-title">Ce que j'explore</div>
+    <div class="tools">
+      <div class="tool">Amazon AWS</div>
+      <div class="tool">Microsoft Azure</div>
+      <div class="tool">Hébergement Cloud</div>
+      <div class="tool">Déploiement auto</div>
+      <div class="tool">Stockage en ligne</div>
+    </div>
+
+    <div class="note">
+      <strong>Pourquoi c'est utile en PHP/Laravel ?</strong><br>
+      AWS et Azure permettent de mettre en ligne une application Laravel facilement, de gérer les fichiers uploadés dans le cloud, et de faire évoluer l'app selon le nombre d'utilisateurs.
+    </div>
+
+    <div class="nav-bottom">
+      <a href="frameworks-js.html">⚡ Frameworks JS →</a>
+      <a href="securite-web.html">🔒 Sécurité Web →</a>
+    </div>
+  </main>
+
+  <footer>php.watch — veille technologique</footer>
+
 </body>
 </html>
