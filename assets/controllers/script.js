@@ -90,7 +90,9 @@
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', e => {
             const targetId = anchor.getAttribute('href');
-            if (!targetId || targetId === '#') return;
+            // Liens "#" (placeholders / ressources bientôt disponibles) : ne rien faire,
+            // surtout pas remonter en haut de page.
+            if (!targetId || targetId === '#') { e.preventDefault(); return; }
             const target = document.querySelector(targetId);
             if (!target) return;
             e.preventDefault();
@@ -215,33 +217,38 @@
             return;
         }
 
-        // Simulation d'envoi (à remplacer par un vrai backend / EmailJS / Formspree)
+        // Envoi réel : ouverture du client mail avec le message pré-rempli.
+        // (Aucun backend requis. Pour un envoi 100% automatique sans client mail,
+        //  remplacer par un endpoint Formspree : form.action = "https://formspree.io/f/XXXX".)
         const btn = form.querySelector('button[type="submit"]');
         const originalHTML = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Envoi en cours...';
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Ouverture de votre messagerie...';
+
+        const dest = 'maminjanaharydanielra@gmail.com';
+        const mailSubject = encodeURIComponent(`[Portfolio] ${subject}`);
+        const mailBody = encodeURIComponent(
+            `Nom : ${name}\n` +
+            `Email : ${email}\n\n` +
+            `${message}\n`
+        );
+        window.location.href = `mailto:${dest}?subject=${mailSubject}&body=${mailBody}`;
 
         setTimeout(() => {
-            btn.innerHTML = '<i class="fas fa-check"></i> Message envoyé !';
+            btn.innerHTML = '<i class="fas fa-check"></i> Messagerie ouverte !';
             form.reset();
             setTimeout(() => {
                 btn.disabled = false;
                 btn.innerHTML = originalHTML;
-            }, 2200);
-        }, 1200);
+            }, 2600);
+        }, 800);
     });
 
-    /* ---------- GAMMA PRESENTATION BUTTONS WARNING ---------- */
-    // Les liens #REMPLACER_PAR_LIEN_GAMMA_* sont des placeholders.
-    // Lorsque l'utilisateur clique et que le lien n'a pas été remplacé, on affiche un message.
-    document.querySelectorAll('[data-gamma]').forEach(link => {
+    /* ---------- LIENS "BIENTÔT DISPONIBLE" ---------- */
+    // Les éléments .soon sont des ressources pas encore en ligne : on bloque le clic.
+    document.querySelectorAll('.soon').forEach(link => {
         link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href') || '';
-            if (href.startsWith('#REMPLACER')) {
-                e.preventDefault();
-                const key = link.dataset.gamma;
-                alert(`🎯 Lien Gamma manquant pour : ${key.toUpperCase()}\n\nRemplacez "${href}" dans index.html par l'URL de votre présentation Gamma.`);
-            }
+            e.preventDefault();
         });
     });
 

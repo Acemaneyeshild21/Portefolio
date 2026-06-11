@@ -1302,3 +1302,31 @@ html[data-theme="dark"] .icon-dark { background: rgba(255, 255, 255, 0.08); }
     }
     [data-reveal] { opacity: 1; transform: none; }
 }
+
+/* ---------- ÉTAT "BIENTÔT DISPONIBLE" (.soon) ---------- */
+.resource-card.soon,
+.btn.soon {
+    position: relative;
+    opacity: 0.55;
+    cursor: not-allowed;
+    filter: grayscale(0.4);
+}
+.resource-card.soon:hover,
+.btn.soon:hover {
+    transform: none;
+}
+/* Petit badge "Bientôt" sur les cartes ressources non disponibles */
+.resource-card.soon::after {
+    content: "Bientôt";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.22);
+    color: #94a3b8;
+}
