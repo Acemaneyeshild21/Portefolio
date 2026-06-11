@@ -204,7 +204,7 @@
 
     /* ---------- CONTACT FORM ---------- */
     const form = document.getElementById('contactForm');
-    form?.addEventListener('submit', (e) => {
+    form?.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const name = form.name?.value.trim();
@@ -217,31 +217,38 @@
             return;
         }
 
-        // Envoi réel : ouverture du client mail avec le message pré-rempli.
-        // (Aucun backend requis. Pour un envoi 100% automatique sans client mail,
-        //  remplacer par un endpoint Formspree : form.action = "https://formspree.io/f/XXXX".)
+        // Envoi direct par email via Web3Forms (aucun backend, message envoyé automatiquement
+        // vers la boîte mail liée à la clé access_key — voir le champ caché dans index.html).
         const btn = form.querySelector('button[type="submit"]');
         const originalHTML = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Ouverture de votre messagerie...';
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Envoi en cours...';
 
-        const dest = 'maminjanaharydanielra@gmail.com';
-        const mailSubject = encodeURIComponent(`[Portfolio] ${subject}`);
-        const mailBody = encodeURIComponent(
-            `Nom : ${name}\n` +
-            `Email : ${email}\n\n` +
-            `${message}\n`
-        );
-        window.location.href = `mailto:${dest}?subject=${mailSubject}&body=${mailBody}`;
+        const restore = (html, ms = 2800) => {
+            btn.innerHTML = html;
+            setTimeout(() => { btn.disabled = false; btn.innerHTML = originalHTML; }, ms);
+        };
 
-        setTimeout(() => {
-            btn.innerHTML = '<i class="fas fa-check"></i> Messagerie ouverte !';
-            form.reset();
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.innerHTML = originalHTML;
-            }, 2600);
-        }, 800);
+        try {
+            const res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: new FormData(form)
+            });
+            const data = await res.json();
+            if (data.success) {
+                form.reset();
+                restore('<i class="fas fa-check"></i> Message envoyé !');
+            } else {
+                console.error('Web3Forms:', data);
+                alert("L'envoi a échoué. Vérifie que la clé Web3Forms est bien configurée.");
+                restore('<i class="fas fa-triangle-exclamation"></i> Échec de l\'envoi');
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Erreur réseau : impossible d'envoyer le message pour le moment.");
+            restore('<i class="fas fa-triangle-exclamation"></i> Erreur réseau');
+        }
     });
 
     /* ---------- LIENS "BIENTÔT DISPONIBLE" ---------- */
